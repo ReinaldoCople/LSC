@@ -708,3 +708,130 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
+
+
+/* Seção de Empresas Parceiras */
+.partners {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #000000 0%, #003399 100%);
+    overflow: hidden;
+}
+
+.partners .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.partners .section-title {
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.partners .section-subtitle {
+    color: #cccccc;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.partners-carousel {
+    position: relative;
+    overflow: hidden;
+    margin: 0 -20px;
+}
+
+.carousel-track {
+    display: flex;
+    animation: scroll 30s linear infinite;
+    gap: 40px;
+    align-items: center;
+}
+
+.partner-logo {
+    flex-shrink: 0;
+    width: 200px;
+    height: 120px;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-logo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.partner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.partner-logo:hover img {
+    filter: grayscale(0%);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pausar animação ao hover */
+.partners-carousel:hover .carousel-track {
+    animation-play-state: paused;
+}
+
+/* Responsividade para empresas parceiras */
+@media (max-width: 768px) {
+    .partners {
+        padding: 60px 0;
+    }
+    
+    .partners .section-title {
+        font-size: 2rem;
+    }
+    
+    .partners .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .partner-logo {
+        width: 150px;
+        height: 90px;
+        padding: 15px;
+    }
+    
+    .carousel-track {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .partners .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .partner-logo {
+        width: 120px;
+        height: 70px;
+        padding: 10px;
+    }
+    
+    .carousel-track {
+        gap: 15px;
+    }
+}
+

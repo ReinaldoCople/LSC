@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Formulário de contato
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Validar campos obrigatórios
@@ -86,19 +86,47 @@ if (contactForm) {
         });
         
         if (isValid) {
-            // Simulação de envio
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             
             submitBtn.textContent = 'Enviando...';
             submitBtn.disabled = true;
             
-            setTimeout(() => {
-                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-                this.reset();
+            try {
+                // Coletar dados do formulário
+                const formData = {
+                    nome: this.querySelector('#nome').value,
+                    email: this.querySelector('#email').value,
+                    telefone: this.querySelector('#telefone').value,
+                    servico: this.querySelector('#servico').value,
+                    mensagem: this.querySelector('#mensagem').value
+                };
+                
+                // Enviar para a API
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(result.message);
+                    this.reset();
+                } else {
+                    alert('Erro: ' + result.message);
+                }
+                
+            } catch (error) {
+                console.error('Erro ao enviar formulário:', error);
+                alert('Erro ao enviar mensagem. Tente novamente mais tarde.');
+            } finally {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }, 2000);
+            }
         }
     });
 }
